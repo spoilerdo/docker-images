@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  db:
+    image: ibmcom/db2:11.5.6.0
+    ports:
+      - 50000:50000
+    environment:
+      LICENSE: accept
+      DB2INST1_PASSWORD: root
+    command: db2sampl

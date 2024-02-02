@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  agro-sql:
+    image: mcr.microsoft.com/mssql/server
+    container_name: agro-sql
+    environment:
+     - "ACCEPT_EULA=Y"
+     - "SA_PASSWORD=longpassword"
+    ports:
+     - "1433:1433"
+    mem_limit: 2000m
+    volumes:
+     - "C:/Users/martijn.dormans/Documents/agro/Misc/Db/data:/var/opt/mssql/data"
+     - "C:/Users/martijn.dormans/Documents/agro/Misc/Db/backup:/var/opt/mssql/backup"

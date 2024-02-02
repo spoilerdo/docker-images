@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  db:
+    image: mariadb
+    volumes:
+      - C:\Users\martijn.dormans\Documents\_docker\keycloak:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: long_password
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: USER
+      MYSQL_PASSWORD: long_password
+    networks:
+      db:
+        aliases:
+         - mariadb
+    
+  keycloak:
+    image: jboss/keycloak:16.1.1
+    environment:
+      - DB_ADDR=mariadb
+      - DB_PORT=3306
+      - DB_DATABASE=keycloak
+      - DB_USER=USER
+      - DB_PASSWORD=long_password
+      - DB_VENDOR=mariadb
+      - PROXY_ADDRESS_FORWARDING=true
+    networks:
+      - db
+    # volumes:
+    #   - keycloak_themes:/opt/jboss/keycloak/themes`
+    #   - keycloak_providers:/opt/jboss/keycloak/standalone/deployments/
+    
+networks:
+  db:
+    driver: bridge
